@@ -73,7 +73,7 @@ const ApplicationPage: React.FC<{ onNavigate: (page: any) => void; initialPositi
                 formDataToSend.append('resumeFile', file);
             }
 
-            const response = await fetch('http://localhost:5000/api/resume', {
+            const response = await fetch('/api/resume', {
                 method: 'POST',
                 body: formDataToSend,
             });
