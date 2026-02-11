@@ -78,6 +78,23 @@ const ApplicationPage: React.FC<{ onNavigate: (page: any) => void; initialPositi
                 body: formDataToSend,
             });
 
+            // Check if response is OK before parsing JSON
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Server response:', errorText);
+                
+                // Try to parse as JSON, fallback to text
+                let errorMessage = 'Server error occurred';
+                try {
+                    const errorData = JSON.parse(errorText);
+                    errorMessage = errorData.message || errorData.error || errorMessage;
+                } catch (e) {
+                    errorMessage = errorText || errorMessage;
+                }
+                
+                throw new Error(errorMessage);
+            }
+
             const data = await response.json();
 
             if (data.success) {

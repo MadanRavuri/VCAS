@@ -138,6 +138,29 @@ router.post('/', upload.single('resumeFile'), async (req, res) => {
   } catch (error) {
     console.error('Resume submission error:', error);
     
+    // Handle multer errors
+    if (error instanceof multer.MulterError) {
+      if (error.code === 'LIMIT_FILE_SIZE') {
+        return res.status(400).json({
+          success: false,
+          message: 'File size too large. Maximum size is 10MB'
+        });
+      }
+      return res.status(400).json({
+        success: false,
+        message: 'File upload error: ' + error.message
+      });
+    }
+
+    // Handle file type errors
+    if (error.message === 'Only PDF, DOC, and DOCX files are allowed') {
+      return res.status(400).json({
+        success: false,
+        message: error.message
+      });
+    }
+    
+    // Handle validation errors
     if (error.name === 'ValidationError') {
       const errors = Object.values(error.errors).map(err => err.message);
       return res.status(400).json({
@@ -147,25 +170,19 @@ router.post('/', upload.single('resumeFile'), async (req, res) => {
       });
     }
 
-    if (error instanceof multer.MulterError) {
-      if (error.code === 'LIMIT_FILE_SIZE') {
-        return res.status(400).json({
-          success: false,
-          message: 'File size too large. Maximum size is 10MB'
-        });
-      }
-    }
-
-    if (error.message === 'Only PDF, DOC, and DOCX files are allowed') {
-      return res.status(400).json({
+    // Handle database connection errors
+    if (error.name === 'MongoNetworkError' || error.name === 'MongoTimeoutError') {
+      return res.status(503).json({
         success: false,
-        message: error.message
+        message: 'Database connection error. Please try again later.'
       });
     }
 
+    // Generic error - always return JSON
     res.status(500).json({
       success: false,
-      message: 'Failed to submit application. Please try again later.'
+      message: 'Failed to submit application. Please try again later.',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 });

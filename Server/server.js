@@ -47,6 +47,26 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/vcas')
 app.use('/api/contact', contactRoutes);
 app.use('/api/resume', resumeRoutes);
 
+// Global error handler - ensures JSON responses
+app.use((err, req, res, next) => {
+  console.error('Global error handler:', err);
+  
+  // Don't send HTML error pages - always send JSON
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || 'Internal server error',
+    error: process.env.NODE_ENV === 'development' ? err.stack : undefined
+  });
+});
+
+// 404 handler - ensures JSON responses for unknown routes
+app.use('*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: 'Route not found'
+  });
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({ 
