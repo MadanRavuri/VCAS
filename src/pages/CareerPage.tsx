@@ -93,12 +93,12 @@ const CareerPage: React.FC<{ onNavigate: (page: any, position?: string) => void 
       {/* Categories */}
       <section className="py-12 bg-white relative -mt-10 mb-10 z-10">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="flex flex-col sm:flex-row md:grid md:grid-cols-3 gap-6 max-w-4xl mx-auto justify-center items-center">
             {jobCategories.map((cat, i) => (
               <div
                 key={i}
                 onClick={scrollToPositions}
-                className="p-6 rounded-3xl bg-white border border-gray-100 shadow-lg flex items-center gap-4 hover:border-primary/30 transition-all cursor-pointer group hover:-translate-y-1 hover:shadow-xl"
+                className="p-6 rounded-3xl bg-white border border-gray-100 shadow-lg flex items-center gap-4 hover:border-primary/30 transition-all cursor-pointer group hover:-translate-y-1 hover:shadow-xl w-full sm:w-auto md:w-full max-w-sm mx-auto sm:mx-0"
               >
                 <div className="text-primary group-hover:scale-110 transition-transform bg-primary/5 p-3 rounded-xl">
                   {cat.icon}

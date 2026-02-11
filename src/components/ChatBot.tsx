@@ -214,13 +214,13 @@ const ChatBot: React.FC<ChatBotProps> = ({ onNavigate }) => {
             {/* Floating Action Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`fixed bottom-6 right-6 z-50 p-3 md:p-3.5 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center ${isOpen ? 'bg-red-500 rotate-90' : 'bg-[#114565] hover:bg-[#0d3650]'
+                className={`fixed bottom-6 right-6 z-50 p-2.5 md:p-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center ${isOpen ? 'bg-red-500 rotate-90' : 'bg-[#114565] hover:bg-[#0d3650]'
                     }`}
             >
                 {isOpen ? (
-                    <X className="w-10 h-10 md:w-12 md:h-12 text-white" />
+                    <X className="w-6 h-6 md:w-8 md:h-8 text-white" />
                 ) : (
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden relative">
+                    <div className="w-6 h-6 md:w-8 md:h-8 rounded-full overflow-hidden relative">
                         <BackgroundVideo
                             src="/aibot.mp4"
                             className="w-full h-full object-cover"
