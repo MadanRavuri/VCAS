@@ -87,8 +87,8 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
         <div className={`transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'} font-sans`}>
 
             {/* 2️⃣ HERO SECTION - Original Video Only Style */}
-            <section className="relative min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] overflow-hidden">
-                <div className="absolute inset-0 z-0 w-full h-full">
+            <section className="relative min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] overflow-hidden">
+                <div className="absolute inset-0 z-0">
                     <BackgroundVideo
                         src="/Home.mp4"
                         className="w-full h-full object-cover"
@@ -96,6 +96,18 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                     {/* Strong Corporate Navy Overlay */}
                     <div className="absolute inset-0 bg-navy/80 mix-blend-multiply" />
                     <div className="absolute inset-0 bg-gradient-to-b from-navy/60 via-transparent to-navy/10" />
+                </div>
+                
+                {/* Add content overlay if needed */}
+                <div className="relative z-10 flex items-center justify-center h-full">
+                    <div className="text-center text-white px-6">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                            Welcome to VCAS
+                        </h1>
+                        <p className="text-lg sm:text-xl md:text-2xl opacity-90">
+                            Connecting Business...
+                        </p>
+                    </div>
                 </div>
             </section>
 
@@ -129,6 +141,10 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                                     playsInline
                                     preload="metadata"
                                     onPlay={handlePlay}
+                                    style={{
+                                        objectFit: 'cover',
+                                        objectPosition: 'center'
+                                    }}
                                 >
                                     Your browser does not support the video tag.
                                 </video>
@@ -139,16 +155,16 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                                         className="absolute inset-0 bg-navy/30 flex items-center justify-center cursor-pointer transition-opacity duration-500 z-10"
                                         onClick={() => videoRef.current?.play()}
                                     >
-                                        <div className="w-16 h-16 md:w-20 md:h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-xl group-hover:scale-110 transition-transform duration-300">
-                                            <Play className="w-6 h-6 md:w-8 md:h-8 text-white fill-white ml-1" />
+                                        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                                            <Play className="w-6 h-6 sm:w-8 sm:h-8 text-white fill-white ml-1" />
                                         </div>
                                     </div>
                                 )}
                             </div>
                         </div>
                         {/* Decorative Elements */}
-                        <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-[80px] -z-10" />
-                        <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-secondary/20 rounded-full blur-[80px] -z-10" />
+                        <div className="absolute -top-8 -right-8 w-32 h-32 sm:w-40 sm:h-40 bg-primary/20 rounded-full blur-[60px] sm:blur-[80px] -z-10" />
+                        <div className="absolute -bottom-8 -left-8 w-32 h-32 sm:w-40 sm:h-40 bg-secondary/20 rounded-full blur-[60px] sm:blur-[80px] -z-10" />
                     </div>
                 </div>
             </section>
@@ -189,13 +205,17 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                                     muted
                                     loop
                                     playsInline
+                                    style={{
+                                        objectFit: 'cover',
+                                        objectPosition: 'center'
+                                    }}
                                 />
                                 {/* Optional: Subtle overlay for depth */}
                                 <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-2xl md:rounded-3xl pointer-events-none" />
                             </div>
                             {/* Decorative Blobs */}
-                            <div className="absolute -top-6 -right-6 w-40 h-40 bg-primary/10 rounded-full blur-3xl -z-10 animate-pulse-slow" />
-                            <div className="absolute -bottom-6 -left-6 w-40 h-40 bg-secondary/10 rounded-full blur-3xl -z-10 animate-pulse-slow" />
+                            <div className="absolute -top-4 -right-4 w-32 h-32 sm:w-40 sm:h-40 md:w-40 md:h-40 bg-primary/10 rounded-full blur-2xl md:blur-3xl -z-10 animate-pulse-slow" />
+                            <div className="absolute -bottom-4 -left-4 w-32 h-32 sm:w-40 sm:h-40 md:w-40 md:h-40 bg-secondary/10 rounded-full blur-2xl md:blur-3xl -z-10 animate-pulse-slow" />
                         </div>
                     </div>
                 </div>

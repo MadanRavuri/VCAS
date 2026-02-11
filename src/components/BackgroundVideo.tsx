@@ -68,17 +68,18 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = memo(({ src, className, 
                 pointerEvents: 'none',
                 objectFit: 'cover',
                 objectPosition: 'center center',
-                width: '100vw',
-                height: '100vh',
-                minWidth: '100%',
-                minHeight: '100%',
+                width: '100%',
+                height: '100%',
+                transform: 'translateZ(0)', // Force GPU acceleration
                 willChange: 'transform',
                 backfaceVisibility: 'hidden',
                 position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%) translateZ(0)',
-                zIndex: -1
+                top: 0,
+                left: 0,
+                zIndex: -1,
+                // Ensure video maintains aspect ratio and covers container
+                minHeight: '100%',
+                minWidth: '100%'
             }}
         />
     );
