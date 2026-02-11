@@ -24,6 +24,10 @@ const ContactPage: React.FC = () => {
         body: JSON.stringify(formData),
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
 
       if (data.success) {
@@ -34,7 +38,11 @@ const ContactPage: React.FC = () => {
       }
     } catch (error) {
       console.error('Error submitting contact form:', error);
-      alert("Network error. Please check your connection and try again.");
+      if (error instanceof SyntaxError && error.message.includes('JSON')) {
+        alert("Server response error. Please try again or contact us directly.");
+      } else {
+        alert("Network error. Please check your connection and try again.");
+      }
     } finally {
       setIsSubmitting(false);
     }

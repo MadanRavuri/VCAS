@@ -6,15 +6,21 @@ import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// Import routes
-import contactRoutes from './routes/contact.js';
-import resumeRoutes from './routes/resume.js';
-
-// Configure dotenv
-dotenv.config();
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Configure dotenv FIRST before importing anything that uses environment variables
+dotenv.config({ path: path.join(__dirname, '..', '.env') });
+
+// Debug: Check if environment variables are loaded
+console.log('Environment variables loaded:');
+console.log('BREVO_API_KEY exists:', !!process.env.BREVO_API_KEY);
+console.log('HR_EMAIL:', process.env.HR_EMAIL);
+console.log('MONGODB_URI exists:', !!process.env.MONGODB_URI);
+
+// Import routes AFTER dotenv is configured
+import contactRoutes from './routes/contact.js';
+import resumeRoutes from './routes/resume.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;

@@ -37,10 +37,10 @@ export const services = [
     Icon: Users,
     title: "HR Consulting",
     desc: "Providing HR consulting services including talent acquisition strategy, workforce planning, and organizational development.",
-    color: "text-navy",
-    bg: "bg-gray-100",
-    border: "border-gray-200",
-    glow: "shadow-navy/10",
+    color: "text-blue-600",
+    bg: "bg-blue-50",
+    border: "border-blue-100",
+    glow: "shadow-blue-500/10",
     image: "/HRvcas.jpg"
   }
 ];

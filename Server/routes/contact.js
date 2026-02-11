@@ -1,5 +1,6 @@
 import express from 'express';
 import Contact from '../models/Contact.js';
+import createEmailService from '../utils/emailService.js';
 
 const router = express.Router();
 
@@ -36,6 +37,36 @@ router.post('/', async (req, res) => {
 
     // Save to database
     const savedContact = await newContact.save();
+
+    // Create email service instance after environment variables are loaded
+    const emailService = createEmailService();
+
+    // Send email notification to HR
+    const emailResult = await emailService.sendContactEmail({
+      name: savedContact.name,
+      email: savedContact.email,
+      phone: savedContact.phone,
+      subject: savedContact.subject,
+      message: savedContact.message
+    });
+
+    if (!emailResult.success) {
+      console.error('Failed to send contact email:', emailResult.error);
+      // Continue with response even if email fails
+    }
+
+    // Send confirmation email to customer
+    const confirmationResult = await emailService.sendContactConfirmationEmail({
+      name: savedContact.name,
+      email: savedContact.email,
+      subject: savedContact.subject,
+      message: savedContact.message
+    });
+
+    if (!confirmationResult.success) {
+      console.error('Failed to send contact confirmation email:', confirmationResult.error);
+      // Continue with response even if confirmation email fails
+    }
 
     res.status(201).json({
       success: true,

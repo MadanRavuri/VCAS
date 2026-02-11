@@ -23,7 +23,28 @@ const ServiceDetailPage: React.FC<ServiceDetailProps> = ({ service, onBack, onNa
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    if (!service) return null;
+    if (!service) {
+        return (
+            <div className="min-h-screen bg-white flex items-center justify-center">
+                <div className="text-center">
+                    <div className="mb-8">
+                        <div className="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                            <ArrowLeft className="w-8 h-8 text-gray-400" />
+                        </div>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-2">Service Not Found</h2>
+                        <p className="text-gray-600 mb-6">The service you're looking for doesn't exist or hasn't been selected.</p>
+                    </div>
+                    <button
+                        onClick={onBack}
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-bold hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl"
+                    >
+                        <ArrowLeft className="w-4 h-4" />
+                        Back to Services
+                    </button>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="pb-24 min-h-screen bg-white">
@@ -130,10 +151,10 @@ const ServiceDetailPage: React.FC<ServiceDetailProps> = ({ service, onBack, onNa
             {showFloatingBack && (
                 <button
                     onClick={onBack}
-                    className="fixed bottom-4 right-4 md:bottom-8 md:left-8 z-50 inline-flex items-center gap-2 px-3 py-2 md:px-4 md:py-3 rounded-full bg-white/90 backdrop-blur-md border border-white/20 text-gray-900 hover:bg-white transition-all group shadow-lg hover:shadow-xl"
+                    className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 px-4 py-3 rounded-full bg-primary text-white hover:bg-primary/90 transition-all group shadow-lg hover:shadow-xl hover:scale-105"
                 >
                     <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                    <span className="hidden sm:inline text-sm md:text-base">Back to Services</span>
+                    <span className="text-sm font-medium">Back to Services</span>
                 </button>
             )}
         </div>

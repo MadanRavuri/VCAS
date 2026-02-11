@@ -3,6 +3,7 @@ import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import Resume from '../models/Resume.js';
+import createEmailService from '../utils/emailService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -82,6 +83,45 @@ router.post('/', upload.single('resumeFile'), async (req, res) => {
 
     // Save to database
     const savedResume = await newResume.save();
+
+    // Create email service instance after environment variables are loaded
+    const emailService = createEmailService();
+
+    // Send email notification to HR
+    const emailResult = await emailService.sendJobApplicationEmail({
+      name: savedResume.name,
+      email: savedResume.email,
+      phone: savedResume.phone,
+      position: savedResume.position,
+      experience: savedResume.experience,
+      education: savedResume.education,
+      skills: savedResume.skills,
+      coverLetter: savedResume.coverLetter,
+      resumeFile: savedResume.resumeFile
+    });
+
+    if (!emailResult.success) {
+      console.error('Failed to send job application email:', emailResult.error);
+      // Continue with response even if email fails
+    }
+
+    // Send confirmation email to applicant
+    const confirmationResult = await emailService.sendJobApplicationConfirmationEmail({
+      name: savedResume.name,
+      email: savedResume.email,
+      phone: savedResume.phone,
+      position: savedResume.position,
+      experience: savedResume.experience,
+      education: savedResume.education,
+      skills: savedResume.skills,
+      coverLetter: savedResume.coverLetter,
+      resumeFile: savedResume.resumeFile
+    });
+
+    if (!confirmationResult.success) {
+      console.error('Failed to send job application confirmation email:', confirmationResult.error);
+      // Continue with response even if confirmation email fails
+    }
 
     res.status(201).json({
       success: true,
