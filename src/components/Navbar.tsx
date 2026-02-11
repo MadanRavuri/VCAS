@@ -17,7 +17,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
     ];
 
     return (
-        <nav className="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-300 py-1 shadow-sm">
+        <nav className="md:hidden fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-300 py-1 shadow-sm">
             <div className="container mx-auto px-6 flex justify-between items-center">
                 <div className="flex items-center">
                     {/* LEFT: Logo & Tagline */}
@@ -30,22 +30,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                     </div>
                 </div>
 
-                {/* DESKTOP: Navigation Menu */}
-                <div className="hidden md:flex items-center space-x-8">
-                    {navigationItems.map((item) => (
-                        <button
-                            key={item.page}
-                            onClick={() => onNavigate(item.page)}
-                            className="text-gray-700 hover:text-primary font-medium transition-colors duration-200 text-sm lg:text-base"
-                        >
-                            {item.name}
-                        </button>
-                    ))}
-                </div>
-
                 {/* MOBILE: Menu Button */}
                 <button
-                    className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                     {isMobileMenuOpen ? (
@@ -58,7 +45,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
 
             {/* MOBILE: Navigation Menu */}
             {isMobileMenuOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-gray-200 shadow-lg">
+                <div className="absolute top-full left-0 w-full bg-white border-b border-gray-200 shadow-lg">
                     <div className="container mx-auto px-6 py-4">
                         <div className="flex flex-col space-y-3">
                             {navigationItems.map((item) => (

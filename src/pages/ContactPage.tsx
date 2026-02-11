@@ -58,18 +58,6 @@ const ContactPage: React.FC = () => {
           <div className="absolute inset-0 bg-navy/80 mix-blend-multiply" />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/90 via-navy/40 to-transparent" />
         </div>
-        
-        {/* Hero Content */}
-        <div className="relative z-10 flex items-center justify-center h-full">
-          <div className="container mx-auto px-4 sm:px-6 text-center text-white">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              Contact Us
-            </h1>
-            <p className="text-lg sm:text-xl md:text-2xl opacity-90 max-w-2xl mx-auto">
-              Get in touch with the VCAS team
-            </p>
-          </div>
-        </div>
       </section>
 
       {/* Contact Content & Form Section */}

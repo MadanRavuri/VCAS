@@ -51,17 +51,6 @@ const AboutPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate }
           <div className="absolute inset-0 bg-navy/80 mix-blend-multiply" />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/90 via-navy/40 to-transparent" />
         </div>
-
-        <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center pt-16 sm:pt-20">
-          <div className="text-center text-white">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              About VCAS
-            </h1>
-            <p className="text-lg sm:text-xl md:text-2xl opacity-90 max-w-2xl mx-auto">
-              Bridging India and Japan with innovative IT solutions
-            </p>
-          </div>
-        </div>
       </section>
 
       {/* Our Story Content */}

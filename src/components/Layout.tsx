@@ -16,7 +16,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onNavigate }) =>
 
     return (
         <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-primary/30">
-            <main className="flex-grow pt-24">
+            <main className="flex-grow pt-16 md:pt-8">
                 {children}
             </main>
             <Footer onNavigate={onNavigate} />

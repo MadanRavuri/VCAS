@@ -97,18 +97,6 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                     <div className="absolute inset-0 bg-navy/80 mix-blend-multiply" />
                     <div className="absolute inset-0 bg-gradient-to-b from-navy/60 via-transparent to-navy/10" />
                 </div>
-                
-                {/* Add content overlay if needed */}
-                <div className="relative z-10 flex items-center justify-center h-full">
-                    <div className="text-center text-white px-6">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-                            Welcome to VCAS
-                        </h1>
-                        <p className="text-lg sm:text-xl md:text-2xl opacity-90">
-                            Connecting Business...
-                        </p>
-                    </div>
-                </div>
             </section>
 
             {/* 3️⃣ VIDEO OVERVIEW SECTION - Restored Content */}
