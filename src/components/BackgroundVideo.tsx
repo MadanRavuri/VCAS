@@ -6,19 +6,20 @@ interface BackgroundVideoProps {
     poster?: string;
 }
 
-const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ src, className, poster }) => {
+const BackgroundVideo: React.FC<BackgroundVideoProps> = memo(({ src, className, poster }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
         const video = videoRef.current;
         if (!video) return;
 
-        // Force high priority loading
-        video.preload = "auto";
+        // Optimize loading
+        video.preload = "metadata";
+        video.disablePictureInPicture = true;
 
         const playVideo = async () => {
             try {
-                if (video.paused) {
+                if (video.paused && video.readyState >= 2) {
                     await video.play();
                 }
             } catch (err) {
@@ -26,10 +27,10 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ src, className, poste
             }
         };
 
-        // Event listeners to ensure continuous playback
-        const handlePause = () => {
-            if (!video.paused || video.ended) return;
+        // Optimized event listeners
+        const handleCanPlay = () => {
             playVideo();
+            video.preload = "auto";
         };
 
         const handleVisibilityChange = () => {
@@ -38,27 +39,15 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ src, className, poste
             }
         };
 
-        // Attach listeners
-        video.addEventListener('pause', handlePause);
-        video.addEventListener('suspend', playVideo); // Retry on suspend
-        video.addEventListener('stalled', playVideo); // Retry on stall
-        document.addEventListener('visibilitychange', handleVisibilityChange);
+        // Attach optimized listeners
+        video.addEventListener('canplay', handleCanPlay, { once: true });
+        video.addEventListener('visibilitychange', handleVisibilityChange);
 
-        // Initial play
+        // Initial play attempt
         playVideo();
 
-        // Safety heartbeat check
-        const intervalId = setInterval(() => {
-            if (video.paused && video.readyState > 2) {
-                playVideo();
-            }
-        }, 1500);
-
         return () => {
-            clearInterval(intervalId);
-            video.removeEventListener('pause', handlePause);
-            video.removeEventListener('suspend', playVideo);
-            video.removeEventListener('stalled', playVideo);
+            video.removeEventListener('canplay', handleCanPlay);
             document.removeEventListener('visibilitychange', handleVisibilityChange);
         };
     }, [src]);
@@ -73,14 +62,14 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ src, className, poste
             autoPlay
             muted
             loop
-            preload="auto"
+            preload="metadata"
             disablePictureInPicture
             style={{
                 pointerEvents: 'none',
                 objectFit: 'cover',
                 width: '100%',
                 height: '100%',
-                transform: 'translate3d(0, 0, 0)', // Force GPU acceleration
+                transform: 'translateZ(0)', // Force GPU acceleration
                 willChange: 'transform',
                 backfaceVisibility: 'hidden',
                 position: 'absolute',
@@ -90,6 +79,6 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ src, className, poste
             }}
         />
     );
-};
+});
 
-export default memo(BackgroundVideo);
+export default BackgroundVideo;

@@ -4,18 +4,47 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VCAS 合同会社 | Premier IT Consulting & Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>VCAS - Connecting Business</title>
   <meta name="description"
     content="VCAS is a premier bridge between India and Japan, empowering organizations with innovative, bilingual IT and business solutions that transform ideas into reality." />
   <meta property="og:image" content="https://bolt.new/static/og_default.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://bolt.new/static/og_default.png" />
+  
+  <!-- Preload critical resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="//api.github.com" />
+  
+  <!-- Performance optimizations -->
+  <meta name="theme-color" content="#08192c" />
+  <link rel="modulepreload" href="/src/main.tsx" />
 </head>
 
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
+  
+  <!-- Performance monitoring (remove in production if not needed) -->
+  <script>
+    // Monitor Core Web Vitals
+    if ('PerformanceObserver' in window) {
+      const observer = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          if (entry.entryType === 'largest-contentful-paint') {
+            console.log('LCP:', entry.startTime);
+          } else if (entry.entryType === 'first-contentful-paint') {
+            console.log('FCP:', entry.startTime);
+          } else if (entry.entryType === 'layout-shift') {
+            console.log('CLS:', entry.value);
+          }
+        }
+      });
+      
+      observer.observe({ entryTypes: ['largest-contentful-paint', 'first-contentful-paint', 'layout-shift'] });
+    }
+  </script>
 </body>
 
 </html>

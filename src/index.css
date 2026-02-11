@@ -230,6 +230,33 @@ h6 {
   }
 }
 
+/* Mobile-first improvements */
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+  }
+  
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .hover\:scale-110:hover {
+    transform: scale(1);
+  }
+  
+  .group:hover .group-hover\:scale-110 {
+    transform: scale(1);
+  }
+}
+
 /* Process Card Layout Fix */
 .process-card {
   height: 100%;

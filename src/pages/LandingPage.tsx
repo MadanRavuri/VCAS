@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo, useMemo } from 'react';
+import { useEffect, useState, memo, useMemo } from 'react';
 import { Home, Rocket, Users, MessageCircle, Cpu } from 'lucide-react';
 // BackgroundVideo moved to App.tsx for persistence
 
@@ -17,8 +17,17 @@ const LandingPage = memo(({ onNavigate, isCompact = false }: LandingPageProps) =
     setLogoLoaded(true);
 
     const updateDistance = () => {
-      // Reduced distance by ~25%
-      setDistance(window.innerWidth >= 768 ? 180 : 135);
+      // Responsive distance adjustments
+      const width = window.innerWidth;
+      if (width < 640) { // Mobile
+        setDistance(120);
+      } else if (width < 768) { // Small tablets
+        setDistance(140);
+      } else if (width < 1024) { // Tablets
+        setDistance(160);
+      } else { // Desktop
+        setDistance(180);
+      }
     };
 
     updateDistance();
@@ -131,7 +140,7 @@ const LandingPage = memo(({ onNavigate, isCompact = false }: LandingPageProps) =
           {/* Center Video Element */}
           <video
             src="/vcas.mp4"
-            className="w-40 h-40 md:w-56 md:h-56 rounded-full object-cover shadow-[0_0_30px_rgba(0,0,0,0.9)] animate-float mix-blend-screen"
+            className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full object-cover shadow-[0_0_30px_rgba(0,0,0,0.9)] animate-float mix-blend-screen"
             autoPlay
             loop
             muted
@@ -155,13 +164,13 @@ const LandingPage = memo(({ onNavigate, isCompact = false }: LandingPageProps) =
                   }}
                   aria-label={button.label}
                 >
-                  <div className="relative flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/40 border border-primary/30 backdrop-blur-md shadow-[0_0_15px_rgba(59,130,246,0.2)] group-hover:bg-primary/20 group-hover:border-primary group-hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] transition-all duration-300">
+                  <div className="relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-black/40 border border-primary/30 backdrop-blur-md shadow-[0_0_15px_rgba(59,130,246,0.2)] group-hover:bg-primary/20 group-hover:border-primary group-hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] transition-all duration-300">
                     <button.icon
-                      className="w-5 h-5 md:w-7 md:h-7 text-white transition-transform duration-300 group-hover:scale-110"
+                      className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white transition-transform duration-300 group-hover:scale-110"
                       strokeWidth={1.5}
                     />
                   </div>
-                  <span className="text-[10px] md:text-xs font-bold tracking-wider uppercase text-blue-100/80 group-hover:text-white group-hover:tracking-widest transition-all duration-300 shadow-black drop-shadow-md">
+                  <span className="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs font-bold tracking-wider uppercase text-blue-100/80 group-hover:text-white group-hover:tracking-widest transition-all duration-300 shadow-black drop-shadow-md">
                     {button.label}
                   </span>
                 </button>

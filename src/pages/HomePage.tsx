@@ -79,13 +79,7 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
             name: "Vision AI",
             logo: "/Vision_logo.png",
             desc: "Vision AI bridges Japan's technological resource gap by leveraging offshore talent to deliver cutting-edge, AI-driven solutions. We support resource transfer and centralized delivery to help organizations streamline operations and improve execution efficiency.",
-            url: "#"
-        },
-        {
-            name: "Shinka Consulting",
-            logo: "/shinkalogo.webp",
-            desc: "A global consulting and technology solutions provider delivering business transformation, process optimization, and digital innovation services across multiple industries.",
-            url: "https://www.shinkas.com"
+            url: "https://www.visionai.jp"
         }
     ];
 
@@ -159,32 +153,34 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                 </div>
             </section>
 
-            {/* 4️⃣ ABOUT US SECTION - Restored Content */}
+            {/* 4️⃣ ABOUT US SECTION - Improved Layout */}
             <section className="py-24 bg-muted relative overflow-hidden">
                 <div className="container mx-auto px-6">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         {/* Content */}
-                        <div>
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-white mb-6 shadow-sm">
+                        <div className="text-center order-2 lg:order-1">
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-white mb-6 shadow-sm mx-auto">
                                 <span className="text-xs font-bold tracking-[0.2em] uppercase text-primary">About VCAS</span>
                             </div>
-                            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black tracking-tight">
-                                About <span className="text-primary">Us</span>
-                            </h2>
-                            <p className="text-slate-600 text-lg mb-8 leading-relaxed font-light">
+                            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black tracking-tight text-center">
+                            About
+                        </h2>
+                            <p className="text-slate-600 text-lg mb-8 leading-relaxed font-light max-w-2xl mx-auto">
                                 VCAS 合同会社 is a premier bridge between India and Japan, committed to providing top-tier IT consulting and services through transparent, streamlined collaboration and bilingual expertise.
                             </p>
 
-                            <button
-                                onClick={() => onNavigate('about')}
-                                className="px-8 py-4 rounded-lg border-2 border-navy text-navy font-bold hover:bg-navy hover:text-white transition-all flex items-center gap-2 group"
-                            >
-                                Learn More About Us <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </button>
+                            <div className="flex justify-center">
+                                <button
+                                    onClick={() => onNavigate('about')}
+                                    className="px-8 py-4 rounded-lg border-2 border-navy text-navy font-bold hover:bg-navy hover:text-white transition-all flex items-center gap-2 group"
+                                >
+                                    Learn More About Us <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                </button>
+                            </div>
                         </div>
 
-                        {/* Illustration - Replaced with Video */}
-                        <div className="relative h-full min-h-[400px]">
+                        {/* Video - Better responsive layout */}
+                        <div className="relative h-full min-h-[400px] order-1 lg:order-2">
                             <div className="relative h-full rounded-3xl overflow-hidden bg-white border border-gray-100 shadow-xl group">
                                 <video
                                     src="/about.mp4"
@@ -194,7 +190,7 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                                     loop
                                     playsInline
                                 />
-                                {/* Optional: Subtle overlay for depth if video is too bright, or just let it shine */}
+                                {/* Optional: Subtle overlay for depth */}
                                 <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-3xl pointer-events-none" />
                             </div>
                             {/* Decorative Blobs */}
@@ -220,7 +216,7 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 items-stretch">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 items-stretch">
                         {services.map((service, index) => {
                             const isCenter = index === 1;
                             return (
@@ -288,8 +284,8 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                         </p>
                     </div>
 
-                    {/* Partners Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10 items-center justify-center max-w-6xl mx-auto">
+                    {/* Partners Grid - Fixed Desktop Layout */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center justify-center max-w-4xl mx-auto">
                         {partners.map((partner, index) => {
                             const isCenter = index === 1;
                             return (
@@ -297,8 +293,8 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                                     key={index}
                                     className={`group rounded-3xl p-8 transition-all duration-500 cursor-pointer flex flex-col items-center justify-center relative
                                         ${isCenter
-                                            ? 'bg-[#0a192f] border border-blue-500/30 shadow-2xl shadow-blue-900/50 md:scale-110 z-20 h-[420px]'
-                                            : 'bg-white/95 border border-white/20 shadow-lg shadow-black/10 md:scale-95 z-10 h-[380px] hover:-translate-y-2 hover:shadow-xl'
+                                            ? 'bg-[#0a192f] border border-blue-500/30 shadow-2xl shadow-blue-900/50 md:scale-110 z-20 h-[420px] w-full max-w-md'
+                                            : 'bg-white/95 border border-white/20 shadow-lg shadow-black/10 md:scale-95 z-10 h-[380px] w-full max-w-md hover:-translate-y-2 hover:shadow-xl'
                                         }`}
                                 >
                                     <div className={`w-full h-32 flex items-center justify-center mb-8 rounded-2xl p-6 transition-transform duration-300
@@ -314,7 +310,7 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                                                 ${isCenter ? 'opacity-100 brightness-110 filter drop-shadow-lg' : 'opacity-90 group-hover:opacity-100'}`}
                                         />
                                     </div>
-                                    <h4 className={`text-xl font-bold mb-4 ${isCenter ? 'text-white' : 'text-gray-800'}`}>
+                                    <h4 className={`text-xl font-bold mb-4 text-center ${isCenter ? 'text-white' : 'text-gray-800'}`}>
                                         {partner.name}
                                     </h4>
                                     <p className={`text-center leading-relaxed mb-8 flex-grow 
@@ -322,15 +318,17 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                                         ${isCenter ? 'text-gray-300' : 'text-gray-600'}`}>
                                         {partner.desc}
                                     </p>
-                                    <button
-                                        onClick={() => window.open(partner.url, '_blank')}
-                                        className={`px-6 py-2 rounded-full font-bold text-sm tracking-wide transition-all border mt-auto
-                                            ${isCenter
-                                                ? 'bg-blue-600 text-white border-blue-500 hover:bg-blue-500 shadow-lg shadow-blue-500/30'
-                                                : 'bg-white text-blue-600 border-2 border-blue-500 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-md shadow-blue-200/50'}`}
-                                    >
-                                        Visit Website
-                                    </button>
+                                    <div className="flex justify-center">
+                                        <button
+                                            onClick={() => window.open(partner.url, '_blank')}
+                                            className={`px-6 py-2 rounded-full font-bold text-sm tracking-wide transition-all border mt-auto
+                                                ${isCenter
+                                                    ? 'bg-blue-600 text-white border-blue-500 hover:bg-blue-500 shadow-lg shadow-blue-500/30'
+                                                    : 'bg-white text-blue-600 border-2 border-blue-500 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-md shadow-blue-200/50'}`}
+                                        >
+                                            Visit Website
+                                        </button>
+                                    </div>
                                 </div>
                             );
                         })}

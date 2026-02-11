@@ -1,18 +1,29 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef, Suspense, lazy } from 'react';
 import { Loader2 } from 'lucide-react';
-import BackgroundVideo from './components/BackgroundVideo';
 import Layout from './components/Layout';
-import ChatBot from './components/ChatBot';
 import Navbar from './components/Navbar';
 
-import LandingPage from './pages/LandingPage';
-import HomePage from './pages/HomePage';
-import CareerPage from './pages/CareerPage';
-import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
-import ServicesPage from './pages/ServicesPage';
-import ServiceDetailPage from './pages/ServiceDetailPage';
-import ApplicationPage from './pages/ApplicationPage';
+// Lazy load components and pages
+const BackgroundVideo = lazy(() => import('./components/BackgroundVideo'));
+const ChatBot = lazy(() => import('./components/ChatBot'));
+const LandingPage = lazy(() => import('./pages/LandingPage'));
+const HomePage = lazy(() => import('./pages/HomePage'));
+const CareerPage = lazy(() => import('./pages/CareerPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const ServicesPage = lazy(() => import('./pages/ServicesPage'));
+const ServiceDetailPage = lazy(() => import('./pages/ServiceDetailPage'));
+const ApplicationPage = lazy(() => import('./pages/ApplicationPage'));
+
+// Loading component
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="flex flex-col items-center gap-4">
+      <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      <span className="text-gray-600">Loading...</span>
+    </div>
+  </div>
+);
 
 type Page = 'home' | 'landing' | 'career' | 'about' | 'contact' | 'services' | 'service-detail' | 'application';
 
@@ -69,25 +80,61 @@ function App() {
   const renderMainContent = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePage onNavigate={navigateTo} />;
-      case 'career':
-        return <CareerPage onNavigate={navigateTo} />;
+        return (
+          <Suspense fallback={<PageLoader />}>
+            <HomePage onNavigate={navigateTo} />
+          </Suspense>
+        );
+      case 'landing':
+        return (
+          <Suspense fallback={<PageLoader />}>
+            <LandingPage
+              key="landing-page-persistent"
+              onNavigate={stableNavigate}
+              isCompact={!isLanding}
+            />
+          </Suspense>
+        );
       case 'about':
-        return <AboutPage onNavigate={navigateTo} />;
+        return (
+          <Suspense fallback={<PageLoader />}>
+            <AboutPage onNavigate={navigateTo} />
+          </Suspense>
+        );
+      case 'career':
+        return (
+          <Suspense fallback={<PageLoader />}>
+            <CareerPage onNavigate={navigateTo} />
+          </Suspense>
+        );
       case 'contact':
-        return <ContactPage />;
+        return (
+          <Suspense fallback={<PageLoader />}>
+            <ContactPage />
+          </Suspense>
+        );
       case 'services':
-        return <ServicesPage onNavigate={navigateTo} onServiceSelect={handleServiceSelect} />;
+        return (
+          <Suspense fallback={<PageLoader />}>
+            <ServicesPage onNavigate={navigateTo} onServiceSelect={handleServiceSelect} />
+          </Suspense>
+        );
       case 'service-detail':
         return (
-          <ServiceDetailPage
-            service={selectedService}
-            onBack={() => navigateTo('services')}
-            onNavigate={navigateTo}
-          />
+          <Suspense fallback={<PageLoader />}>
+            <ServiceDetailPage
+              service={selectedService}
+              onBack={() => navigateTo('services')}
+              onNavigate={navigateTo}
+            />
+          </Suspense>
         );
       case 'application':
-        return <ApplicationPage onNavigate={navigateTo} initialPosition={initialPosition} />;
+        return (
+          <Suspense fallback={<PageLoader />}>
+            <ApplicationPage onNavigate={navigateTo} initialPosition={initialPosition} />
+          </Suspense>
+        );
       default:
         return null;
     }
@@ -124,10 +171,12 @@ function App() {
       >
         {/* Persistent Video Wrapper - Decoupled from LandingPage component to prevent re-renders */}
         <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
-          <BackgroundVideo
-            src="/vcas_landing_page_video.mp4"
-            className="absolute top-0 left-0 w-full h-full object-cover"
-          />
+          <Suspense fallback={<div className="absolute inset-0 bg-navy" />}>
+            <BackgroundVideo
+              src="/vcas_landing_page_video.mp4"
+              className="absolute top-0 left-0 w-full h-full object-cover"
+            />
+          </Suspense>
           {/* Dark overlay for better text readability */}
           <div className="absolute inset-0 bg-black/40 pointer-events-none" />
         </div>
@@ -151,7 +200,7 @@ function App() {
         <div
           id="right-panel"
           className={`
-            absolute top-0 right-0 h-full overflow-y-auto z-10 custom-scrollbar
+            absolute top-0 right-0 h-full overflow-y-auto z-10 custom-scrollbar touch-pan-y
             transition-opacity duration-500
             ${isMobile ? 'w-full left-0' : 'w-[65%]'}
             ${isTransitioning ? 'opacity-0' : 'opacity-100'}
@@ -173,7 +222,9 @@ function App() {
       )}
 
       {/* Persistent ChatBot */}
-      <ChatBot onNavigate={stableNavigate} />
+      <Suspense fallback={null}>
+        <ChatBot onNavigate={stableNavigate} />
+      </Suspense>
 
     </div>
   );
