@@ -117,3 +117,6 @@ app.listen(PORT, () => {
   console.log(`🚀 VCAS Server is running on port ${PORT}`);
   console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
 });
+
+// Export the app for Vercel
+export default app;
