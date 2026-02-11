@@ -10,13 +10,32 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Configure dotenv FIRST before importing anything that uses environment variables
-dotenv.config({ path: path.join(__dirname, '..', '.env') });
+const envPath = path.join(__dirname, '..', '.env');
+dotenv.config({ path: envPath });
 
 // Debug: Check if environment variables are loaded
 console.log('Environment variables loaded:');
 console.log('BREVO_API_KEY exists:', !!process.env.BREVO_API_KEY);
 console.log('HR_EMAIL:', process.env.HR_EMAIL);
 console.log('MONGODB_URI exists:', !!process.env.MONGODB_URI);
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('Environment path:', envPath);
+
+// Critical: Check for required environment variables
+if (!process.env.BREVO_API_KEY) {
+  console.error('❌ CRITICAL: BREVO_API_KEY is not set!');
+  console.error('Please configure this environment variable in your deployment platform');
+}
+
+if (!process.env.HR_EMAIL) {
+  console.error('❌ CRITICAL: HR_EMAIL is not set!');
+  console.error('Please configure this environment variable in your deployment platform');
+}
+
+if (!process.env.MONGODB_URI) {
+  console.error('❌ CRITICAL: MONGODB_URI is not set!');
+  console.error('Please configure this environment variable in your deployment platform');
+}
 
 // Import routes AFTER dotenv is configured
 import contactRoutes from './routes/contact.js';
