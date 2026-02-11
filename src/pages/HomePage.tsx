@@ -162,18 +162,18 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                 <div className="container mx-auto px-6">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         {/* Content */}
-                        <div className="text-center order-2 lg:order-1">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-white mb-6 shadow-sm mx-auto">
+                        <div className="text-center lg:text-left">
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-white mb-6 shadow-sm mx-auto lg:mx-0">
                                 <span className="text-xs font-bold tracking-[0.2em] uppercase text-primary">About VCAS</span>
                             </div>
-                            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black tracking-tight text-center">
+                            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black tracking-tight">
                             About
                         </h2>
-                            <p className="text-slate-600 text-lg mb-8 leading-relaxed font-light max-w-2xl mx-auto">
+                            <p className="text-slate-600 text-lg mb-8 leading-relaxed font-light max-w-2xl mx-auto lg:mx-0">
                                 VCAS 合同会社 is a premier bridge between India and Japan, committed to providing top-tier IT consulting and services through transparent, streamlined collaboration and bilingual expertise.
                             </p>
 
-                            <div className="flex justify-center">
+                            <div className="flex justify-center lg:justify-start">
                                 <button
                                     onClick={() => onNavigate('about')}
                                     className="px-8 py-4 rounded-lg border-2 border-navy text-navy font-bold hover:bg-navy hover:text-white transition-all flex items-center gap-2 group"
@@ -184,7 +184,7 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                         </div>
 
                         {/* Video - Better responsive layout */}
-                        <div className="relative h-full min-h-[300px] md:min-h-[400px] order-1 lg:order-2">
+                        <div className="relative h-full min-h-[300px] md:min-h-[400px]">
                             <div className="relative h-full rounded-2xl md:rounded-3xl overflow-hidden bg-white border border-gray-100 shadow-xl group">
                                 <video
                                     src="/about.mp4"
