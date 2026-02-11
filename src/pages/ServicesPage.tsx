@@ -55,7 +55,7 @@ const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onServiceSelect
   return (
     <div className="pb-24">
       {/* Hero Section - Video with minimal overlay */}
-      <section className="relative h-[60vh] overflow-hidden">
+      <section className="relative min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] overflow-hidden">
         <div className="absolute inset-0 w-full h-full z-0">
           <BackgroundVideo
             src="/service.mp4"

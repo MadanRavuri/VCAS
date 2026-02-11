@@ -140,11 +140,15 @@ const LandingPage = memo(({ onNavigate, isCompact = false }: LandingPageProps) =
           {/* Center Video Element */}
           <video
             src="/vcas.mp4"
-            className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full object-cover shadow-[0_0_30px_rgba(0,0,0,0.9)] animate-float mix-blend-screen"
+            className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 xl:w-56 xl:h-56 rounded-full object-cover shadow-[0_0_30px_rgba(0,0,0,0.9)] animate-float mix-blend-screen"
             autoPlay
             loop
             muted
             playsInline
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center'
+            }}
           />
 
           {/* Icon ring around the GIF (icons stay in place) */}

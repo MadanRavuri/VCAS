@@ -41,9 +41,9 @@ const AboutPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate }
   return (
     <div className="pb-24">
       {/* Header */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] overflow-hidden">
         {/* Video Background */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 w-full h-full">
           <BackgroundVideo
             src="/aboutus.mp4"
             className="w-full h-full object-cover"
@@ -52,7 +52,7 @@ const AboutPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate }
           <div className="absolute inset-0 bg-gradient-to-b from-navy/90 via-navy/40 to-transparent" />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 text-center pt-20">
+        <div className="container mx-auto px-6 relative z-10 text-center pt-16 md:pt-20">
           {/* Content can go here if needed */}
         </div>
       </section>

@@ -49,8 +49,8 @@ const ContactPage: React.FC = () => {
   return (
     <div className="pb-24">
       {/* Hero Section with Video */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
+      <section className="relative min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] overflow-hidden">
+        <div className="absolute inset-0 z-0 w-full h-full">
           <BackgroundVideo
             src="/contact.mp4"
             className="w-full h-full object-cover"

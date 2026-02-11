@@ -87,8 +87,8 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
         <div className={`transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'} font-sans`}>
 
             {/* 2️⃣ HERO SECTION - Original Video Only Style */}
-            <section className="relative min-h-[60vh] flex items-center overflow-hidden">
-                <div className="absolute inset-0 z-0">
+            <section className="relative min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] overflow-hidden">
+                <div className="absolute inset-0 z-0 w-full h-full">
                     <BackgroundVideo
                         src="/Home.mp4"
                         className="w-full h-full object-cover"
@@ -119,8 +119,8 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                     </div>
 
                     <div className="max-w-5xl mx-auto relative group">
-                        <div className="relative rounded-3xl overflow-hidden bg-white/5 border border-white/10 p-2 shadow-2xl shadow-navy/50 backdrop-blur-sm">
-                            <div className="relative rounded-2xl overflow-hidden aspect-video group">
+                        <div className="relative rounded-2xl md:rounded-3xl overflow-hidden bg-white/5 border border-white/10 p-2 shadow-2xl shadow-navy/50 backdrop-blur-sm">
+                            <div className="relative rounded-xl md:rounded-2xl overflow-hidden aspect-video group">
                                 <video
                                     ref={videoRef}
                                     src="/video.mp4"
@@ -139,8 +139,8 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                                         className="absolute inset-0 bg-navy/30 flex items-center justify-center cursor-pointer transition-opacity duration-500 z-10"
                                         onClick={() => videoRef.current?.play()}
                                     >
-                                        <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-xl group-hover:scale-110 transition-transform duration-300">
-                                            <Play className="w-8 h-8 text-white fill-white ml-1" />
+                                        <div className="w-16 h-16 md:w-20 md:h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                                            <Play className="w-6 h-6 md:w-8 md:h-8 text-white fill-white ml-1" />
                                         </div>
                                     </div>
                                 )}
@@ -180,8 +180,8 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                         </div>
 
                         {/* Video - Better responsive layout */}
-                        <div className="relative h-full min-h-[400px] order-1 lg:order-2">
-                            <div className="relative h-full rounded-3xl overflow-hidden bg-white border border-gray-100 shadow-xl group">
+                        <div className="relative h-full min-h-[300px] md:min-h-[400px] order-1 lg:order-2">
+                            <div className="relative h-full rounded-2xl md:rounded-3xl overflow-hidden bg-white border border-gray-100 shadow-xl group">
                                 <video
                                     src="/about.mp4"
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -191,7 +191,7 @@ const HomePage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate })
                                     playsInline
                                 />
                                 {/* Optional: Subtle overlay for depth */}
-                                <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-3xl pointer-events-none" />
+                                <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-2xl md:rounded-3xl pointer-events-none" />
                             </div>
                             {/* Decorative Blobs */}
                             <div className="absolute -top-6 -right-6 w-40 h-40 bg-primary/10 rounded-full blur-3xl -z-10 animate-pulse-slow" />
