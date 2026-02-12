@@ -9,8 +9,8 @@ const AboutPage: React.FC<{ onNavigate: (page: any) => void }> = ({ onNavigate }
   const timelineData = [
     { year: "2021", title: "The Foundation", desc: "VCAS 合同会社 was established to bridge Japanese and Indian markets." },
     { year: "2022", title: "Business Expansion", desc: "Expanded services to include comprehensive bilingual IT and HR solutions." },
-    { year: "2025 MAR", title: "Series A Funding", desc: "Secured $25M to scale our AI-driven design engine." },
-    { year: "2026 NOW", title: "Global Expansion", desc: "Launching the V3 platform to the global market." }
+    { year: "2027", title: "Seed Funding", desc: "Plan to secure $25M to scale our AI-driven design engine." },
+    { year: "2028", title: "Global Expansion", desc: "Launching the V3 platform to the global market." }
   ];
 
   useEffect(() => {
